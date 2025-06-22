@@ -33,6 +33,8 @@
 	#define _USE_32BIT_TIME_T
 #endif //_USE_32BIT_TIME_T
 
+#define MENU_GAME_FILE "Data\\Menu.ini"
+
 #define _CRT_SECURE_NO_DEPRECATE
 #define _CRT_NONSTDC_NO_DEPRECATE
 
@@ -42,7 +44,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+#define Toado		1
 #define HealthBar	1
+#define ShowEXP		1
 #define BUTTONS_SEASON6
 
 #pragma warning( push, 3 )

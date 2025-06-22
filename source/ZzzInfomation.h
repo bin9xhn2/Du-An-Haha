@@ -82,6 +82,13 @@ public:
 	BYTE	PacketSerial;
 	BYTE	InfinityArrowAdditionalMana;
 
+#if ShowEXP
+	bool PowerLevelUp;
+
+	int ATTKPowerValue;
+	std::chrono::steady_clock::time_point last_time;
+#endif // ShowEXP
+
     void Init();
 	void InitAddValue ();
     void SetCharacter(BYTE Class);

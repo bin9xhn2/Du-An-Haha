@@ -5494,20 +5494,17 @@ BOOL ReceiveDieExp(BYTE* ReceiveBuffer, BOOL bEncrypted)
 	}
 
 	
-
-	if (Exp > 0)
+#if ShowEXP
+if (Exp > 0)
 	{
-		vec3_t expColor;
-		Vector(0.6f, 0.2f, 0.8f, expColor); // tím nhẹ
-
-		vec3_t expPos;
-		expPos[0] = o->Position[0];
-		expPos[1] = o->Position[1];
-		expPos[2] = o->Position[2] -100.0f;
-
-		CreatePoint(expPos, Exp, expColor, 22.0f); // 22 là scale, bạn có thể chỉnh theo ý muốn
+		CharacterMachine->PowerLevelUp = true;
+		CharacterMachine->ATTKPowerValue = Exp;
+		CharacterMachine->last_time = std::chrono::steady_clock::now();
 		
 	}
+#endif // ShowEXP
+
+	
 
 
 #ifdef CONSOLE_DEBUG
@@ -5559,32 +5556,27 @@ BOOL ReceiveDieExpLarge(BYTE* ReceiveBuffer, BOOL bEncrypted)
 		CharacterAttribute->Experience += Exp;
 	}
 
-	if (Exp > 0)
-	{
-		vec3_t expColor;
-		Vector(0.6f, 0.2f, 0.8f, expColor); // tím nhẹ
-
-		vec3_t expPos;
-		expPos[0] = o->Position[0];
-		expPos[1] = o->Position[1];
-		expPos[2] = o->Position[2] -100.0f;
-
-		CreatePoint(expPos, Exp, expColor, 22.0f); // 22 là scale, bạn có thể chỉnh theo ý muốn
-		
-
-		// if (Exp > 0)
-			//{
-			//	char Text[100];
-			//	if (gCharacterManager.IsMasterLevelExpCheck(Hero->Class) == true)
-			//	{
-			//		sprintf(Text, GlobalText[1750], Exp);
-			//	}
-			//	else
-			//		sprintf(Text, GlobalText[486], Exp);								 // thông báo exp nhận được
-			//	g_pChatListBox->AddText("", Text, SEASON3B::TYPE_SYSTEM_MESSAGE);
-			//}
-	}
+	
+#if ShowEXP
+	 if (Exp > 0)
+			{
+				CharacterMachine->PowerLevelUp = true;
+				CharacterMachine->ATTKPowerValue = Exp;
+				CharacterMachine->last_time = std::chrono::steady_clock::now();
+				char Text[100];
+				if (gCharacterManager.IsMasterLevelExpCheck(Hero->Class) == true)
+				{
+					sprintf(Text, GlobalText[1750], Exp);
+				}
+				else
+					sprintf(Text, GlobalText[486], Exp);								 // thông báo exp nhận được
+				g_pChatListBox->AddText("", Text, SEASON3B::TYPE_SYSTEM_MESSAGE);
+			}
+	
 	return (TRUE);
+#endif // ShowEXP
+
+	
 }
 
 

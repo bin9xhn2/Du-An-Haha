@@ -4870,8 +4870,11 @@ void OpenFont()
     LoadBitmap("Interface\\FontInput.tga"     ,BITMAP_FONT    ,GL_NEAREST,GL_CLAMP_TO_EDGE);
 	LoadBitmap("Interface\\FontTest.tga"      ,BITMAP_FONT+1  );
 	LoadBitmap("Interface\\Hit.tga"			,BITMAP_FONT_HIT,GL_NEAREST,GL_CLAMP_TO_EDGE);
-
+#if ShowEXP
+	LoadBitmap("Interface\\FontNumPower.tga", BITMAP_FONT_POWER, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	LoadBitmap("Interface\\FontTextPower.tga", BITMAP_TEXT_POWER, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	g_pRenderText->Create(0, g_hDC);
+#endif //ShowEXP
 }
 
 void SaveMacro(char *FileName)

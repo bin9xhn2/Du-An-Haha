@@ -112,7 +112,8 @@ void CHealthBar::DrawNewHealthBar()
 			ViewportAddress->Object.Position[2] + ViewportAddress->Object.BoundingBoxMax[2] + 100.f,
 			Angle);
 
-		BeginOpengl(0, 0, GetWindowsX, GetWindowsY);
+		BeginOpengl(0, 0, 640, 480);
+		//BeginOpengl(0, 0, GetWindowsX, GetWindowsY);
 		Projection(Angle, &ScreenX, &ScreenY);
 		EndOpengl();
 

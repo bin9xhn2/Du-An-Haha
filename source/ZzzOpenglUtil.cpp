@@ -1876,3 +1876,23 @@ bool CollisionDetectLineToOBB(vec3_t p1, vec3_t p2, OBB_t obb)
 	return true;
 }
 
+#if ShowEXP
+
+float RenderNumberHQ(float x, float y, int Num, float Width, float Height)
+{
+	char Text[32];
+	memset(Text, 0, sizeof(Text));
+
+	itoa(Num, Text, 10);
+
+	for (int i = 0; i < (int)strlen(Text); i++)
+	{
+		float u = (float)(Text[i] - 48) * 36.f / 512.f;
+		RenderBitmap(BITMAP_FONT_POWER, x, y, Width, Height, u, 0.f, 36.f / 512.f, 58.f / 64.f, true, true, 0.0);
+		x += Width * 0.75f;
+	}
+	return x;
+}
+
+#endif // ShowEXP
+

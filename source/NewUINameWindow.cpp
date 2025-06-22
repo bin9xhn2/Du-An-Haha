@@ -190,10 +190,56 @@ void SEASON3B::CNewUINameWindow::RenderName()
 			}
 		}
 	}	
-}
+#if ShowEXP
+#if Toado		//Toado
+	float TDX1 = GetPrivateProfileIntA("VIEW", "TDX1", 0, MENU_GAME_FILE);
+	float TDY1 = GetPrivateProfileIntA("VIEW", "TDY1", 0, MENU_GAME_FILE);
+	float TDX2 = GetPrivateProfileIntA("VIEW", "TDX2", 0, MENU_GAME_FILE);
+	float TDY2 = GetPrivateProfileIntA("VIEW", "TDY2", 0, MENU_GAME_FILE);
+	float TDX3 = GetPrivateProfileIntA("VIEW", "TDX3", 0, MENU_GAME_FILE);											  //check Vị trí qua mess.ini
+	float TDY3 = GetPrivateProfileIntA("VIEW", "TDY3", 0, MENU_GAME_FILE);
+	float TDX4 = GetPrivateProfileIntA("VIEW", "TDX4", 0, MENU_GAME_FILE);
+	float TDY4 = GetPrivateProfileIntA("VIEW", "TDY4", 0, MENU_GAME_FILE);
+	float TDX5 = GetPrivateProfileIntA("VIEW", "TDX5", 0, MENU_GAME_FILE);
+	float TDY5 = GetPrivateProfileIntA("VIEW", "TDY5", 0, MENU_GAME_FILE);
+#endif	//Toado
+	if (CharacterMachine->PowerLevelUp)
+	{
+		auto current_time = std::chrono::steady_clock::now();
+		double difTime = std::chrono::duration<double>(current_time - CharacterMachine->last_time).count();
 
+		double time_checked = 1.5;
+
+		if (difTime >= time_checked)
+		{
+			CharacterMachine->PowerLevelUp = false;
+			CharacterMachine->last_time = current_time;
+		}
+
+		float Alpha = (float)(1.f - (difTime / time_checked));
+		float MoveY = (float)(60.f * (1.f - (difTime / time_checked)));
+
+		glColor4f(1.f, 1.f, 1.f, 1);
+
+		vec3_t Position;
+		int ScreenX = 0, ScreenY = 0;
+
+		OBJECT* pObj = &Hero->Object;
+		Vector(pObj->Position[0], pObj->Position[1], pObj->Position[2] + pObj->BoundingBoxMax[2] + 100.f, Position);
+
+		Projection(Position, &ScreenX, &ScreenY);
+
+		ScreenY = ScreenY + (Alpha * 50);
+
+		RenderNumberHQ(ScreenX + 6.f, ScreenY - 8.f, CharacterMachine->ATTKPowerValue, 7.f, 10.f);
+		RenderBitmap(BITMAP_TEXT_POWER, ScreenX - 5+TDX1-TDY1, ScreenY+TDX2-TDY2, 60.f, 28.f, 0.0, 0.0, 1.f, 118.f / 128.f, true, true, 0.0);
+	}
+
+}
+#endif //ShowEXP
 float SEASON3B::CNewUINameWindow::GetLayerDepth()
 {
 	return 1.0f;
 }
+
 

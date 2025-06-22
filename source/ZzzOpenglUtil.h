@@ -98,6 +98,9 @@ void RenderSprite(int Texture,vec3_t Position,float Width,float Height,vec3_t Li
 void RenderSpriteUV(int Texture,vec3_t Position,float Width,float Height,float (*UV)[2],vec3_t Light[4],float Alpha=1.f);
 void RenderNumber(vec3_t Position,int Num,vec3_t Color,float Alpha=1.f,float Scale=15.f);
 float RenderNumber2D(float x,float y,int Num,float Width,float Height);
+#if ShowEXP
+extern float RenderNumberHQ(float x, float y, int Num, float Width, float Height);
+#endif // ShowEXP
 void RenderColor(float x,float y,float Width,float Height,float Alpha = 0.f,int Flag = 0);
 void RenderColorRadius(float x, float y, float Width, float Height, float Alpha, int Flag, float radius);
 void EndRenderColor();
